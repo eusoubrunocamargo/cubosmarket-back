@@ -50,24 +50,20 @@ const fazerLogin = async (req, res) => {
     console.log(email,senha);
 
     if (!email || !senha) {
-        return res
-            .status(400)
-            .json({
-                mensagem: "Todos os campos são obrigatórios!"
-            });
-    };
+        return res.status(400).json({ 
+            mensagem: "Todos os campos são obrigatórios!"
+        });
+    }
 
     try {
 
         const usuario = await knex('usuario').where({ email }).first();
 
         if (!usuario || !(await bcrypt.compare(senha, usuario.senha))) {
-            return res
-                .status(401)
-                .json({
-                    mensagem: "E-mail ou senha inválidos!"
-                });
-        };
+            return res.status(401).json({
+                mensagem: "E-mail ou senha inválidos!"
+            });
+        }
 
         console.log("passou aqui");
 
@@ -80,9 +76,7 @@ const fazerLogin = async (req, res) => {
         
         if(usuario.loja_cadastrada){
             console.log("tem loja!");
-            const loja = await knex("lojas")
-            .where('usuario_id', usuario.id)
-            .first();
+            const loja = await knex('lojas').where('usuario_id', usuario.id).first();
             marketname = loja.nome;
         };
 
