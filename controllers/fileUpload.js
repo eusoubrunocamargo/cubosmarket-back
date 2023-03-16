@@ -2,10 +2,10 @@
 const processFile = require('../middleware/checkUpload');
 const {format} = require("util");
 const {Storage} = require("@google-cloud/storage");
-const whatNodeEnv = (process.env.NODE_ENV === 'production') ? process.env.GCK :
-"google-cloud-key.json";
+// const whatNodeEnv = (process.env.NODE_ENV === 'production') ? process.env.GCK :
+// "google-cloud-key.json";
 const storage = new Storage({
-    keyFilename: whatNodeEnv,
+    keyFilename: process.env.GCK,
 });
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const bucket = storage.bucket(BUCKET_NAME);
