@@ -5,7 +5,7 @@ const {Storage} = require("@google-cloud/storage");
 // const whatNodeEnv = (process.env.NODE_ENV === 'production') ? process.env.GCK :
 // "google-cloud-key.json";
 const storage = new Storage({
-    keyFilename: process.env.GCK,
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const bucket = storage.bucket(BUCKET_NAME);
