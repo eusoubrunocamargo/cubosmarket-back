@@ -31,7 +31,7 @@ const fazerCadastro = async (req, res) => {
         const result = await knex('usuario').insert({ nome, email, senha: senhaBcrypt}).returning('*');
 
         return res.status(201).json({
-            mensagem: "Usuário cadastrado com sucesso",
+            mensagem: "Usuário cadastrado com sucesso, por favor, faça login",
             usuario: result[0],
         });
 

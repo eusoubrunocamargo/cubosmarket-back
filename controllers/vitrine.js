@@ -4,6 +4,10 @@ const exibirVitrine = async (req,res) => {
 try {
 
     const produtos = await knex.select().from('produtos');
+    // res.json(produtos);
+
+    console.log(produtos);
+
     res.json(produtos);
 
 } catch (error) {

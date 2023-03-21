@@ -15,7 +15,7 @@ const adicionarProduto = async (req,res) => {
         .select("id")
         .first();
 
-        const produto = await knex("produtos")
+        const [produto] = await knex("produtos")
         .insert({
             nome,
             descricao,
@@ -23,15 +23,32 @@ const adicionarProduto = async (req,res) => {
             estoque,
             categoria_id,
             loja_id,
-            imagem_url,
+            urls: imagem_url,
         })
         .returning("*");
 
         console.log(produto);
 
+        // console.log(imagem_url);
+
+        // const imagens = imagem_url.map((url) => ({
+        //     produto_id: produto.id,
+        //     imagem_url: url,
+        // }));
+
+        // console.log(imagens);
+
+        // const imagensInseridas = await knex("imagens_produto")
+        // .insert(imagens)
+        // .returning("*");
+
+        // console.log(produto);
+        //console.log(imagensInseridas);
+
         return res.status(201).json({
             mensagem: "Produto cadastrado com sucesso!",
             produto,
+            //imagens: imagensInseridas,
         })
         
     } catch (error) {
